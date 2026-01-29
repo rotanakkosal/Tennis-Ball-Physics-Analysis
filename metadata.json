@@ -1,0 +1,5 @@
+{
+  "name": "Clay Court Physics",
+  "description": "A physics simulation replicating tennis balls bouncing on a clay court based on video analysis.",
+  "requestFramePermissions": []
+}
