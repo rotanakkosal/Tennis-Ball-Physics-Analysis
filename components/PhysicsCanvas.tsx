@@ -1,10 +1,9 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { PHYSICS, COLORS, DIMENSIONS } from '../constants';
 import { Ball } from '../types';
 
 export const PhysicsCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [balls, setBalls] = useState<Ball[]>([]);
   const requestRef = useRef<number | null>(null);
   const ballsRef = useRef<Ball[]>([]); // Ref for animation loop to avoid dependency staleness
 
@@ -25,7 +24,6 @@ export const PhysicsCanvas: React.FC = () => {
       isSleeping: false
     }));
     ballsRef.current = initialBalls;
-    setBalls(initialBalls);
   }, []);
 
   const spawnBall = useCallback((x: number, y: number) => {
@@ -103,7 +101,6 @@ export const PhysicsCanvas: React.FC = () => {
 
     // Drop Shadow (scales with height)
     // We draw this before the ball, but we need to untranslate for the shadow to be on the floor
-    // Actually, simpler to draw shadows in a separate pass, but per-ball is okay for this quantity
     ctx.restore(); // Pop back to global coords for shadow logic
     
     // Draw Shadow
